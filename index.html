@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FixFast Service — หน้า Landing Page ระบบแจ้งซ่อมออนไลน์</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-soft: #f1f5f9;
+      --ink: #0f172a;
+      --muted: #475569;
+      --border: #e2e8f0;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-soft: #eff6ff;
+      --accent: #0284c7;
+      --success: #059669;
+      --success-soft: #ecfdf5;
+      --warning: #d97706;
+      --warning-soft: #fffbeb;
+      --danger: #dc2626;
+      --danger-soft: #fef2f2;
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      --max-w: 1140px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, "Noto Sans Thai", "Leelawadee UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header / Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 68px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.125rem;
+      color: var(--ink);
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      width: 42px;
+      height: 42px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--ink);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-outline {
+      background: var(--surface);
+      color: var(--ink);
+      border-color: var(--border);
+    }
+
+    .btn-outline:hover {
+      background: var(--surface-soft);
+    }
+
+    .btn-sm {
+      padding: 8px 14px;
+      font-size: 0.875rem;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 64px 0 56px;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(37, 99, 235, 0.12), transparent 42%),
+        radial-gradient(circle at 10% 80%, rgba(2, 132, 199, 0.08), transparent 36%),
+        var(--bg);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 18px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 2.85rem);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 560px;
+      margin-bottom: 26px;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .stat-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .stat-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .hero-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-card-title {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .pill-success {
+      background: var(--success-soft);
+      color: var(--success);
+    }
+
+    .pill-warning {
+      background: var(--warning-soft);
+      color: var(--warning);
+    }
+
+    .pill-info {
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+    }
+
+    .pill-danger {
+      background: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    .mini-ticket-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mini-ticket {
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--surface-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mini-ticket strong {
+      display: block;
+      font-size: 0.92rem;
+    }
+
+    .mini-ticket small {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    /* Sections */
+    section {
+      padding: 64px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 40px;
+    }
+
+    .section-eyebrow {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.5rem, 3vw, 2.05rem);
+      margin-bottom: 10px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+    }
+
+    /* Services */
+    .services-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .service-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+    }
+
+    .service-card h3 {
+      font-size: 1.05rem;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      flex: 1;
+    }
+
+    .service-link {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      align-self: flex-start;
+    }
+
+    .service-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Steps */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .step-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      position: relative;
+    }
+
+    .step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+      margin-bottom: 14px;
+    }
+
+    .step-card h3 {
+      font-size: 1.02rem;
+      margin-bottom: 8px;
+    }
+
+    .step-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* Form + Tracker */
+    .workspace-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px;
+    }
+
+    .panel h3 {
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+
+    .panel-desc {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    input[type="text"],
+    input[type="search"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+    }
+
+    textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .alert {
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .alert.show {
+      display: block;
+    }
+
+    .alert-success {
+      background: var(--success-soft);
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    .alert-error {
+      background: var(--danger-soft);
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
+    /* Tracker */
+    .tracker-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .filter-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .ticket-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 460px;
+      overflow-y: auto;
+      padding-right: 2px;
+    }
+
+    .ticket-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+
+    .ticket-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .ticket-id {
+      font-family: Consolas, monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .ticket-title {
+      font-weight: 600;
+      font-size: 0.96rem;
+      margin-bottom: 4px;
+    }
+
+    .ticket-meta {
+      font-size: 0.83rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--ink);
+      color: #cbd5e1;
+      padding: 36px 0;
+      font-size: 0.9rem;
+    }
+
+    .footer-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero-grid,
+      .workspace-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav-links,
+      .nav-actions .btn-outline {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .navbar.menu-open .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 16px 20px;
+        gap: 14px;
+      }
+
+      .services-grid,
+      .steps-grid,
+      .form-grid,
+      .stats-row {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 40px 0;
+      }
+
+      section {
+        padding: 46px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#top" class="brand">
+        <span class="brand-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+          </svg>
+        </span>
+        <span>FixFast แจ้งซ่อม</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#services">บริการของเรา</a></li>
+        <li><a href="#steps">ขั้นตอนแจ้งซ่อม</a></li>
+        <li><a href="#repair-form">แบบฟอร์มตัวอย่าง</a></li>
+        <li><a href="#tracker">ติดตามสถานะ</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#tracker" class="btn btn-outline btn-sm">เช็กสถานะงาน</a>
+        <a href="#repair-form" class="btn btn-primary btn-sm">แจ้งซ่อมเลย</a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="เปิดเมนู" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badge">
+            <span class="badge-dot"></span>
+            ระบบแจ้งซ่อมออนไลน์ • พร้อมรับเรื่อง 24 ชม.
+          </div>
+          <h1>
+            แจ้งซ่อมง่าย รวดเร็ว<br />
+            <span>ติดตามสถานะได้ทันที</span>
+          </h1>
+          <p>
+            ศูนย์รับแจ้งซ่อมบำรุงอาคาร อุปกรณ์สำนักงาน ระบบไฟฟ้า ประปา แอร์ และไอที
+            กรอกข้อมูลเพียงไม่กี่ขั้นตอน ทีมช่างพร้อมเข้าตรวจสอบอย่างเป็นระบบ
+          </p>
+          <div class="hero-cta">
+            <a href="#repair-form" class="btn btn-primary">กรอกแบบฟอร์มแจ้งซ่อม</a>
+            <a href="#steps" class="btn btn-outline">ดูขั้นตอนการแจ้งซ่อม</a>
+          </div>
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-value">15 นาที</div>
+              <div class="stat-label">รับเรื่องและออกรหัสงาน</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value">6 หมวด</div>
+              <div class="stat-label">ครอบคลุมงานช่างและไอที</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-value">30 วัน</div>
+              <div class="stat-label">รับประกันหลังซ่อมเสร็จ</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="ตัวอย่างคิวงานซ่อมล่าสุด">
+          <div class="hero-card-head">
+            <span class="hero-card-title">คิวแจ้งซ่อมล่าสุด (ตัวอย่าง)</span>
+            <span class="pill pill-info">อัปเดตสด</span>
+          </div>
+          <div class="mini-ticket-list">
+            <div class="mini-ticket">
+              <div>
+                <strong>REP-2026-0103 • แอร์มีน้ำหยด ห้อง Lab 302</strong>
+                <small>หมวด: เครื่องปรับอากาศ • 10 นาทีที่แล้ว</small>
+              </div>
+              <span class="pill pill-warning">กำลังซ่อม</span>
+            </div>
+            <div class="mini-ticket">
+              <div>
+                <strong>REP-2026-0102 • โปรเจกเตอร์ต่อภาพไม่ติด</strong>
+                <small>หมวด: อุปกรณ์ไอที • 35 นาทีที่แล้ว</small>
+              </div>
+              <span class="pill pill-danger">ด่วนมาก</span>
+            </div>
+            <div class="mini-ticket">
+              <div>
+                <strong>REP-2026-0101 • เปลี่ยนหลอดไฟทางเดินชั้น 2</strong>
+                <small>หมวด: ระบบไฟฟ้า • 2 ชั่วโมงที่แล้ว</small>
+              </div>
+              <span class="pill pill-success">เสร็จสิ้น</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="services-section" id="services">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-eyebrow">Our Services</div>
+          <h2>บริการแจ้งซ่อมที่รองรับ</h2>
+          <p>เลือกหมวดงานที่พบปัญหาเพื่อส่งเรื่องตรงถึงทีมช่างเฉพาะทางได้ทันที</p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+            <h3>ระบบไฟฟ้าและแสงสว่าง</h3>
+            <p>แก้ไขปลั๊กไฟชำรุด เบรกเกอร์ตัด หลอดไฟกระพริบ หรือไฟดับเฉพาะจุด</p>
+            <button type="button" class="service-link" data-pick-category="ระบบไฟฟ้าและแสงสว่าง">แจ้งซ่อมหมวดนี้ →</button>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+              </svg>
+            </div>
+            <h3>ระบบประปาและสุขาภิบาล</h3>
+            <p>ซ่อมก๊อกน้ำรั่ว ท่อน้ำซึม ชักโครกขัดข้อง อ่างล้างหน้าตัน และปั๊มน้ำ</p>
+            <button type="button" class="service-link" data-pick-category="ระบบประปาและสุขาภิบาล">แจ้งซ่อมหมวดนี้ →</button>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
+              </svg>
+            </div>
+            <h3>เครื่องปรับอากาศ</h3>
+            <p>แอร์ไม่เย็น มีเสียงดัง น้ำหยด ล้างแอร์ประจำรอบ หรือเช็กน้ำยาแอร์</p>
+            <button type="button" class="service-link" data-pick-category="เครื่องปรับอากาศ">แจ้งซ่อมหมวดนี้ →</button>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <h3>คอมพิวเตอร์และเครือข่าย</h3>
+            <p>อินเทอร์เน็ตช้า/หลุด สัญญาณ Wi-Fi เครื่องพิมพ์ โปรเจกเตอร์ และระบบเสียง</p>
+            <button type="button" class="service-link" data-pick-category="คอมพิวเตอร์และเครือข่าย">แจ้งซ่อมหมวดนี้ →</button>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            </div>
+            <h3>อาคารและเฟอร์นิเจอร์</h3>
+            <p>ประตู ลูกบิด กลอน หน้าต่าง ฝ้าเพดาน โต๊ะ เก้าอี้ และอุปกรณ์ภายในห้อง</p>
+            <button type="button" class="service-link" data-pick-category="อาคารและเฟอร์นิเจอร์">แจ้งซ่อมหมวดนี้ →</button>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+            </div>
+            <h3>แจ้งเหตุฉุกเฉินและอื่นๆ</h3>
+            <p>ไฟฟ้าลัดวงจร น้ำท่วมขัง กระจกแตก หรือปัญหาเร่งด่วนด้านความปลอดภัย</p>
+            <button type="button" class="service-link" data-pick-category="แจ้งเหตุฉุกเฉินและอื่นๆ">แจ้งซ่อมหมวดนี้ →</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="steps">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-eyebrow">How It Works</div>
+          <h2>ขั้นตอนการแจ้งซ่อม 4 ขั้นตอน</h2>
+          <p>ติดตามความคืบหน้าได้โปร่งใสตั้งแต่ส่งคำขอจนปิดงาน</p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>กรอกแบบฟอร์มแจ้งซ่อม</h3>
+            <p>ระบุชื่อผู้แจ้ง สถานที่ หมวดหมู่งาน และอาการเสียที่พบในฟอร์มด้านล่าง</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>รับรหัสติดตามงาน</h3>
+            <p>ระบบออกเลข Ticket อัตโนมัติ พร้อมจัดลำดับความเร่งด่วนให้ทีมช่าง</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>ช่างเข้าตรวจสอบและซ่อม</h3>
+            <p>เจ้าหน้าที่ติดต่อยืนยันนัดหมายและดำเนินการแก้ไขหน้างานตามกำหนด</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <h3>ตรวจรับและปิดงาน</h3>
+            <p>ทดสอบการใช้งานร่วมกัน อัปเดตสถานะเป็นเสร็จสิ้น พร้อมรับประกัน 30 วัน</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace-section" id="repair-form">
+      <div class="container workspace-grid">
+        <div class="panel">
+          <h3>แบบฟอร์มตัวอย่างแจ้งซ่อม</h3>
+          <p class="panel-desc">ทดลองกรอกข้อมูลแล้วกดส่ง ระบบจะสร้างรายการแจ้งซ่อมตัวอย่างให้เห็นทางขวา</p>
+
+          <form id="sampleRepairForm" novalidate>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="fullName">ชื่อผู้แจ้ง *</label>
+                <input type="text" id="fullName" name="fullName" placeholder="เช่น นายศิวัช รอสวัสดิ์" required />
+              </div>
+
+              <div class="form-group">
+                <label for="contact">เบอร์โทร / อีเมลติดต่อ *</label>
+                <input type="text" id="contact" name="contact" placeholder="เช่น 080-058-1949" required />
+              </div>
+
+              <div class="form-group">
+                <label for="location">อาคาร / ห้อง / สถานที่ *</label>
+                <input type="text" id="location" name="location" placeholder="เช่น อาคาร 3 ห้องปฏิบัติการ 305" required />
+              </div>
+
+              <div class="form-group">
+                <label for="category">ประเภทงานซ่อม *</label>
+                <select id="category" name="category" required>
+                  <option value="ระบบไฟฟ้าและแสงสว่าง">ระบบไฟฟ้าและแสงสว่าง</option>
+                  <option value="ระบบประปาและสุขาภิบาล">ระบบประปาและสุขาภิบาล</option>
+                  <option value="เครื่องปรับอากาศ">เครื่องปรับอากาศ</option>
+                  <option value="คอมพิวเตอร์และเครือข่าย">คอมพิวเตอร์และเครือข่าย</option>
+                  <option value="อาคารและเฟอร์นิเจอร์">อาคารและเฟอร์นิเจอร์</option>
+                  <option value="แจ้งเหตุฉุกเฉินและอื่นๆ">แจ้งเหตุฉุกเฉินและอื่นๆ</option>
+                </select>
+              </div>
+
+              <div class="form-group full">
+                <label for="urgency">ระดับความเร่งด่วน</label>
+                <select id="urgency" name="urgency">
+                  <option value="ปกติ">ปกติ (ดำเนินการตามคิวภายใน 24 ชม.)</option>
+                  <option value="ด่วน">ด่วน (กระทบการเรียน/การทำงาน ภายใน 4 ชม.)</option>
+                  <option value="ด่วนมาก">ด่วนมาก (เหตุฉุกเฉิน/อันตราย ภายใน 1 ชม.)</option>
+                </select>
+              </div>
+
+              <div class="form-group full">
+                <label for="description">รายละเอียดอาการที่พบ *</label>
+                <textarea id="description" name="description" placeholder="อธิบายอาการเบื้องต้น เช่น ปลั๊กไฟโต๊ะแถวหลังไม่มีไฟเข้า 2 จุด" required></textarea>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">ส่งคำขอแจ้งซ่อม</button>
+              <button type="button" class="btn btn-outline" id="fillDemoBtn">กรอกข้อมูลตัวอย่าง</button>
+              <button type="reset" class="btn btn-outline" id="resetFormBtn">ล้างฟอร์ม</button>
+            </div>
+
+            <div class="alert" id="formAlert" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+
+        <div class="panel" id="tracker">
+          <h3>ติดตามสถานะคำขอแจ้งซ่อม (ตัวอย่าง)</h3>
+          <p class="panel-desc">ค้นหาตามเลข Ticket / สถานที่ หรือกรองตามสถานะการดำเนินงาน</p>
+
+          <div class="tracker-controls">
+            <input type="search" id="searchTicket" placeholder="ค้นหา เช่น REP-2026 หรือ ห้อง Lab..." aria-label="ค้นหารายการแจ้งซ่อม" />
+            <div class="filter-tabs" role="tablist" aria-label="ตัวกรองสถานะ">
+              <button type="button" class="filter-btn active" data-status="all">ทั้งหมด</button>
+              <button type="button" class="filter-btn" data-status="รอดำเนินการ">รอดำเนินการ</button>
+              <button type="button" class="filter-btn" data-status="กำลังซ่อม">กำลังซ่อม</button>
+              <button type="button" class="filter-btn" data-status="เสร็จสิ้น">เสร็จสิ้น</button>
+            </div>
+          </div>
+
+          <div class="ticket-list" id="ticketList"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">FixFast Service — ระบบแจ้งซ่อมออนไลน์</div>
+        <div>เปิดทำการทุกวัน 08:00 – 20:00 น. • สายด่วนฉุกเฉิน 24 ชม. โทร. 02-000-1234</div>
+      </div>
+      <div class="footer-links">
+        <a href="#services">บริการของเรา</a>
+        <a href="#steps">ขั้นตอนแจ้งซ่อม</a>
+        <a href="#repair-form">แบบฟอร์มตัวอย่าง</a>
+        <a href="#tracker">ติดตามสถานะ</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const navbar = document.getElementById("navbar");
+      const menuToggle = document.getElementById("menuToggle");
+      const navLinks = document.getElementById("navLinks");
+      const form = document.getElementById("sampleRepairForm");
+      const formAlert = document.getElementById("formAlert");
+      const fillDemoBtn = document.getElementById("fillDemoBtn");
+      const resetFormBtn = document.getElementById("resetFormBtn");
+      const categorySelect = document.getElementById("category");
+      const ticketList = document.getElementById("ticketList");
+      const searchInput = document.getElementById("searchTicket");
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      const categoryButtons = document.querySelectorAll("[data-pick-category]");
+
+      let ticketCounter = 104;
+      let activeStatus = "all";
+
+      const tickets = [
+        {
+          id: "REP-2026-0103",
+          title: "แอร์มีน้ำหยดบริเวณโต๊ะหน้าชั้น",
+          category: "เครื่องปรับอากาศ",
+          location: "อาคาร 2 ห้อง Lab 302",
+          reporter: "อ.ปริญญา",
+          urgency: "ด่วน",
+          status: "กำลังซ่อม",
+          time: "10 นาทีที่แล้ว"
+        },
+        {
+          id: "REP-2026-0102",
+          title: "โปรเจกเตอร์ต่อสาย HDMI แล้วไม่มีภาพ",
+          category: "คอมพิวเตอร์และเครือข่าย",
+          location: "อาคาร 1 ห้องบรรยาย 104",
+          reporter: "นายศิวัช",
+          urgency: "ด่วนมาก",
+          status: "รอดำเนินการ",
+          time: "35 นาทีที่แล้ว"
+        },
+        {
+          id: "REP-2026-0101",
+          title: "หลอดไฟทางเดินดับ 2 ดวง",
+          category: "ระบบไฟฟ้าและแสงสว่าง",
+          location: "อาคาร 2 โถงทางเดินชั้น 2",
+          reporter: "เจ้าหน้าที่อาคาร",
+          urgency: "ปกติ",
+          status: "เสร็จสิ้น",
+          time: "2 ชั่วโมงที่แล้ว"
+        }
+      ];
+
+      function escapeHtml(text) {
+        return String(text)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function getStatusPillClass(status) {
+        if (status === "เสร็จสิ้น") return "pill-success";
+        if (status === "กำลังซ่อม") return "pill-warning";
+        return "pill-info";
+      }
+
+      function getUrgencyPillClass(urgency) {
+        if (urgency === "ด่วนมาก") return "pill-danger";
+        if (urgency === "ด่วน") return "pill-warning";
+        return "pill-info";
+      }
+
+      function renderTickets() {
+        const keyword = searchInput.value.trim().toLowerCase();
+        const filtered = tickets.filter(function (item) {
+          const matchStatus = activeStatus === "all" || item.status === activeStatus;
+          const haystack = (item.id + " " + item.title + " " + item.location + " " + item.category + " " + item.reporter).toLowerCase();
+          const matchKeyword = !keyword || haystack.includes(keyword);
+          return matchStatus && matchKeyword;
+        });
+
+        if (filtered.length === 0) {
+          ticketList.innerHTML = '<div class="ticket-card"><div class="ticket-title">ไม่พบรายการแจ้งซ่อมที่ตรงกับเงื่อนไข</div><div class="ticket-meta">ลองเปลี่ยนตัวกรองสถานะหรือคำค้นหาใหม่อีกครั้ง</div></div>';
+          return;
+        }
+
+        ticketList.innerHTML = filtered
+          .map(function (item) {
+            return (
+              '<article class="ticket-card">' +
+                '<div class="ticket-top">' +
+                  '<span class="ticket-id">' + escapeHtml(item.id) + '</span>' +
+                  '<span class="pill ' + getStatusPillClass(item.status) + '">' + escapeHtml(item.status) + '</span>' +
+                '</div>' +
+                '<div class="ticket-title">' + escapeHtml(item.title) + '</div>' +
+                '<div class="ticket-meta">' +
+                  '<span>สถานที่: ' + escapeHtml(item.location) + '</span>' +
+                  '<span>หมวด: ' + escapeHtml(item.category) + '</span>' +
+                  '<span>ผู้แจ้ง: ' + escapeHtml(item.reporter) + '</span>' +
+                  '<span class="pill ' + getUrgencyPillClass(item.urgency) + '">ความเร่งด่วน: ' + escapeHtml(item.urgency) + '</span>' +
+                  '<span>' + escapeHtml(item.time) + '</span>' +
+                '</div>' +
+              '</article>'
+            );
+          })
+          .join("");
+      }
+
+      function showAlert(type, message) {
+        formAlert.className = "alert show " + (type === "success" ? "alert-success" : "alert-error");
+        formAlert.textContent = message;
+      }
+
+      menuToggle.addEventListener("click", function () {
+        const isOpen = navbar.classList.toggle("menu-open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      navLinks.addEventListener("click", function (event) {
+        if (event.target.tagName === "A" && navbar.classList.contains("menu-open")) {
+          navbar.classList.remove("menu-open");
+          menuToggle.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      categoryButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          categorySelect.value = button.getAttribute("data-pick-category");
+          document.getElementById("repair-form").scrollIntoView({ behavior: "smooth" });
+          document.getElementById("fullName").focus();
+        });
+      });
+
+      fillDemoBtn.addEventListener("click", function () {
+        document.getElementById("fullName").value = "นายศิวัช รอสวัสดิ์";
+        document.getElementById("contact").value = "080-058-1949";
+        document.getElementById("location").value = "อาคารปฏิบัติการ ห้องคอม 401";
+        categorySelect.value = "คอมพิวเตอร์และเครือข่าย";
+        document.getElementById("urgency").value = "ด่วน";
+        document.getElementById("description").value = "สัญญาณ Wi-Fi หลุดบ่อยและเครื่องที่โต๊ะ 12 เชื่อมต่อเครือข่ายไม่ได้";
+        formAlert.className = "alert";
+      });
+
+      resetFormBtn.addEventListener("click", function () {
+        formAlert.className = "alert";
+      });
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const fullName = document.getElementById("fullName").value.trim();
+        const contact = document.getElementById("contact").value.trim();
+        const location = document.getElementById("location").value.trim();
+        const category = categorySelect.value;
+        const urgency = document.getElementById("urgency").value;
+        const description = document.getElementById("description").value.trim();
+
+        if (!fullName || !contact || !location || !description) {
+          showAlert("error", "กรุณากรอกข้อมูลที่มีเครื่องหมาย * ให้ครบถ้วนก่อนส่งคำขอครับ");
+          return;
+        }
+
+        const newId = "REP-2026-" + String(ticketCounter).padStart(4, "0");
+        ticketCounter += 1;
+
+        tickets.unshift({
+          id: newId,
+          title: description,
+          category: category,
+          location: location,
+          reporter: fullName + " (" + contact + ")",
+          urgency: urgency,
+          status: "รอดำเนินการ",
+          time: "เมื่อสักครู่"
+        });
+
+        activeStatus = "all";
+        filterButtons.forEach(function (btn) {
+          btn.classList.toggle("active", btn.getAttribute("data-status") === "all");
+        });
+        searchInput.value = "";
+        renderTickets();
+
+        showAlert(
+          "success",
+          "บันทึกคำขอแจ้งซ่อมตัวอย่างสำเร็จ! รหัสติดตามงานของคุณคือ " + newId + " (เพิ่มเข้าคิวฝั่งขวาแล้ว)"
+        );
+        form.reset();
+      });
+
+      filterButtons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          activeStatus = btn.getAttribute("data-status");
+          filterButtons.forEach(function (other) {
+            other.classList.toggle("active", other === btn);
+          });
+          renderTickets();
+        });
+      });
+
+      searchInput.addEventListener("input", renderTickets);
+
+      renderTickets();
+    })();
+  </script>
+</body>
+</html>
